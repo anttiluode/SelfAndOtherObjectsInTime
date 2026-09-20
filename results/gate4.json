@@ -1,0 +1,47 @@
+{
+  "boundary_phase": {
+    "boundary_iou": {
+      "mean": 0.9967545501213655,
+      "std": 0.00709382956483372
+    },
+    "boundary_mae": {
+      "mean": 0.05387369791666667,
+      "std": 0.12236195629769503
+    },
+    "gate_pass": true,
+    "relation_accuracy": {
+      "mean": 0.8974609375,
+      "std": 0.04633729320409431
+    }
+  },
+  "fixed_window": {
+    "boundary_iou": {
+      "mean": 0.18927659408143585,
+      "std": 0.02994724506750029
+    },
+    "boundary_mae": {
+      "mean": 13.650553385416668,
+      "std": 1.3158631907275276
+    },
+    "gate_pass": false,
+    "relation_accuracy": {
+      "mean": 0.5524088541666667,
+      "std": 0.0742066133625745
+    }
+  },
+  "whole_window": {
+    "boundary_iou": {
+      "mean": 0.2648061116536458,
+      "std": 0.012231284525633634
+    },
+    "boundary_mae": {
+      "mean": 23.526204427083336,
+      "std": 0.39140110482027624
+    },
+    "gate_pass": false,
+    "relation_accuracy": {
+      "mean": 0.5042317708333334,
+      "std": 0.07358139045889353
+    }
+  }
+}

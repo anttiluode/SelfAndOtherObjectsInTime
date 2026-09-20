@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Self & Other Objects in Time — Gates 1–3</title>
+<title>Self & Other Objects in Time — Gates 1–4</title>
 <style>
 :root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;background:#0b0d12;color:#eef2ff}
 *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 50% 0,#182033,#0b0d12 45%) fixed}
@@ -17,25 +17,21 @@ code{color:#b8e1ff}.panel{margin-top:28px;border:1px solid #2a3345;background:#1
 .controls{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
 button{background:#eaf4ff;color:#0c1320;border:0;border-radius:999px;padding:10px 16px;font-weight:700;cursor:pointer}
 button.alt{background:#232c3d;color:#e8eef8}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
-.card{border:1px solid #2d394e;background:#0e131c;border-radius:16px;padding:16px}.card h3{margin-top:0}
-.metric{margin:12px 0}.label{display:flex;justify-content:space-between;font-size:.88rem;color:#b8c2d3}
-.track{height:9px;background:#202837;border-radius:999px;overflow:hidden;margin-top:6px}.fill{height:100%;background:linear-gradient(90deg,#9bdcff,#d9b2ff);width:0;transition:width .5s}
 .small{font-size:.9rem;color:#98a6bb;line-height:1.5}.equation{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;padding:14px;background:#080b10;border-radius:12px;overflow:auto;line-height:1.55}
 .pass{color:#b9f5c8}.fail{color:#ffb5b5}
 table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.92rem}th,td{text-align:right;padding:10px;border-bottom:1px solid #273144}th:first-child,td:first-child{text-align:left}
 .modes{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}.mode{padding:14px;border:1px solid #344158;border-radius:14px;background:#0d121a;text-align:center}
+.timeline{display:grid;grid-template-columns:2fr 1fr 3fr 1fr 2fr;gap:4px;margin:18px 0}.slice{min-height:72px;border-radius:12px;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;border:1px solid #344158;background:#0d121a}.event{outline:2px solid #9bdcff}
 footer{margin-top:36px;color:#78869a;font-size:.88rem}
-@media(max-width:760px){.cards,.modes{grid-template-columns:1fr}.nodes{grid-template-columns:1fr}table{font-size:.76rem}}
+@media(max-width:760px){.modes{grid-template-columns:1fr}.nodes{grid-template-columns:1fr}table{font-size:.76rem}.timeline{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <main>
   <h1>addressable events.</h1>
   <p class="lead">
-    <b>SelfAndOtherObjectsInTime</b> is now three gates deep:
-    perspective detours leave residue; identities are distributed rather than integer slots;
-    and relational roles can be recovered from temporal position inside one event stream.
+    A stable process can be interrupted, instantiate another viewpoint, acquire residue,
+    infer relations from temporal order, and now discover which bounded event owns that time coordinate.
   </p>
 
   <section class="panel">
@@ -51,30 +47,16 @@ footer{margin-top:36px;color:#78869a;font-size:.88rem}
       <button onclick="play()">run the detour</button>
       <button class="alt" onclick="resetAnim()">reset</button>
     </div>
-    <div class="equation">SELF′ = same control anchor + residue(detour)</div>
   </section>
 
   <section class="panel">
     <h2>Gate 2 — identities are not slots</h2>
     <div class="equation">address = bind(ACTOR,A) + bind(PATIENT,B) + bind(VIEW,P) + selfness(P,anchor) + bind(OBJECT,O) + bind(TIME,τ)</div>
-    <table>
-      <thead><tr><th>mechanism</th><th>A↔B</th><th>SELF↔OTHER</th><th>OTHER↔OTHER</th><th>anchor</th></tr></thead>
-      <tbody>
-        <tr><td><b>distributed binder</b> <span class="pass">pass</span></td><td>0.903</td><td>0.795</td><td>0.803</td><td>1.000</td></tr>
-        <tr><td>role-blind bag</td><td class="fail">0.504</td><td>0.809</td><td>0.846</td><td>1.000</td></tr>
-        <tr><td>viewless</td><td>0.931</td><td class="fail">0.505</td><td class="fail">0.501</td><td>1.000</td></tr>
-        <tr><td>SELF/OTHER binary</td><td>0.778</td><td>0.748</td><td class="fail">0.496</td><td>1.000</td></tr>
-        <tr><td>mutable anchor</td><td>0.903</td><td>0.795</td><td>0.803</td><td class="fail">0.740</td></tr>
-      </tbody>
-    </table>
+    <p class="small">Distributed binder: role 0.903 · SELF/OTHER 0.795 · OTHER/OTHER 0.803 · anchor 1.000.</p>
   </section>
 
   <section class="panel">
     <h2>Gate 3 — time creates the role</h2>
-    <p class="lead">
-      There is no actor channel and no patient channel now. The memory receives a single
-      vector-valued stream. Identities occupy temporal modes and are recovered by event-relative phase.
-    </p>
     <div class="modes">
       <div class="mode"><b>perspective</b><br><span class="small">persistent mode</span></div>
       <div class="mode"><b>object</b><br><span class="small">oscillatory mode</span></div>
@@ -82,42 +64,52 @@ footer{margin-top:36px;color:#78869a;font-size:.88rem}
       <div class="mode"><b>patient</b><br><span class="small">late pulse</span></div>
     </div>
     <div class="equation" style="margin-top:16px">same identities + reversed temporal order → swapped relation</div>
+    <p class="small">Phase-relational accuracy stays ≈0.935 from 9 to 25 samples; fixed absolute timing collapses to 0.225.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Gate 4 — first discover the event</h2>
+    <div class="timeline">
+      <div class="slice">resident process</div>
+      <div class="slice">boundary</div>
+      <div class="slice event"><b>event-relative time</b></div>
+      <div class="slice">boundary</div>
+      <div class="slice">resident process′</div>
+    </div>
+    <div class="equation">ongoing stream → boundary discovery → normalized phase → relation</div>
     <table>
-      <thead><tr><th>mechanism</th><th>9 samples</th><th>17 samples</th><th>25 samples</th><th>decode cosine</th></tr></thead>
+      <thead><tr><th>mechanism</th><th>relation</th><th>boundary IoU</th><th>boundary MAE</th></tr></thead>
       <tbody>
-        <tr><td><b>phase relational</b> <span class="pass">pass</span></td><td>0.936</td><td>0.935</td><td>0.935</td><td>0.991</td></tr>
-        <tr><td>symmetric pair</td><td class="fail">0.494</td><td class="fail">0.502</td><td class="fail">0.499</td><td>0.991</td></tr>
-        <tr><td>fixed clock</td><td>0.936</td><td class="fail">0.578</td><td class="fail">0.225</td><td class="fail">0.361</td></tr>
+        <tr><td><b>boundary + phase</b> <span class="pass">pass</span></td><td>0.897</td><td>0.997</td><td>0.054</td></tr>
+        <tr><td>whole stream = event</td><td class="fail">0.504</td><td>0.265</td><td>23.526</td></tr>
+        <tr><td>fixed training window</td><td class="fail">0.552</td><td>0.189</td><td>13.651</td></tr>
       </tbody>
     </table>
     <p class="small">
-      The symmetric attacker proves that correctly identifying the participants is not enough.
-      The fixed-clock attacker proves that memorizing absolute sample positions is not enough.
-      Event-relative phase preserves the relation under time stretch.
+      Event onset and duration are hidden at test time. The detector is still hand-designed:
+      Gate 4 removes oracle cuts, not the criterion for what deserves to become an event.
     </p>
   </section>
 
   <section class="panel">
     <h2>next weakness</h2>
     <p class="lead">
-      The event boundary and temporal basis are still supplied. The next clean attack is to make
-      the system discover where an event begins/ends, or make its temporal modes self-organize,
-      before adding any richer brain analogy.
+      One event at a time is too clean. The next useful collision is interruption:
+      one object train opens while another is still resident. Can the system preserve both event-relative clocks,
+      perspective residue and the stable control origin without flattening them into one timeline?
     </p>
   </section>
 
-  <footer>Mechanism toys, not consciousness claims or one-to-one brain circuitry. Receipts: results/gate1.json, gate2.json, gate3.json.</footer>
+  <footer>Mechanism toys, not consciousness claims or one-to-one brain circuitry. Receipts live under results/.</footer>
 </main>
 <script>
 const nodes=[...document.querySelectorAll('.node')];
 let timer=null;
-function animateBars(){document.querySelectorAll('.fill').forEach(x=>x.style.width=x.dataset.v+'%')}
-function resetAnim(){clearInterval(timer);nodes.forEach(n=>n.classList.remove('active'));document.querySelectorAll('.fill').forEach(x=>x.style.width='0')}
+function resetAnim(){clearInterval(timer);nodes.forEach(n=>n.classList.remove('active'))}
 function play(){
-  resetAnim();animateBars();let i=0;nodes[0].classList.add('active');
+  resetAnim();let i=0;nodes[0].classList.add('active');
   timer=setInterval(()=>{nodes.forEach(n=>n.classList.remove('active'));i++;if(i>=nodes.length){clearInterval(timer);nodes[nodes.length-1].classList.add('active');return}nodes[i].classList.add('active')},650)
 }
-animateBars();
 </script>
 </body>
 </html>
