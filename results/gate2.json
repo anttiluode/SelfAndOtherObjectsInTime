@@ -1,0 +1,42 @@
+{
+  "distributed_binder": {
+    "anchor_fidelity": {"mean": 1.0, "std": 8.993834424997155e-17},
+    "gate_pass": true,
+    "other_other_accuracy": {"mean": 0.80322265625, "std": 0.059158653827076184},
+    "residue_norm": {"mean": 5.229540169787063, "std": 0.6683581360335042},
+    "role_swap_accuracy": {"mean": 0.90283203125, "std": 0.05444062230367617},
+    "self_other_accuracy": {"mean": 0.79541015625, "std": 0.06369216689211543}
+  },
+  "mutable_anchor": {
+    "anchor_fidelity": {"mean": 0.7397015268065517, "std": 0.04338653041036908},
+    "gate_pass": false,
+    "other_other_accuracy": {"mean": 0.80322265625, "std": 0.059158653827076184},
+    "residue_norm": {"mean": 5.229540169787063, "std": 0.6683581360335042},
+    "role_swap_accuracy": {"mean": 0.90283203125, "std": 0.05444062230367617},
+    "self_other_accuracy": {"mean": 0.79541015625, "std": 0.06369216689211543}
+  },
+  "role_blind_bag": {
+    "anchor_fidelity": {"mean": 1.0, "std": 8.993834424997155e-17},
+    "gate_pass": false,
+    "other_other_accuracy": {"mean": 0.845703125, "std": 0.052950944186429524},
+    "residue_norm": {"mean": 4.368463956405766, "std": 0.5573846433807532},
+    "role_swap_accuracy": {"mean": 0.50439453125, "std": 0.03069188501917524},
+    "self_other_accuracy": {"mean": 0.80908203125, "std": 0.055550442566297556}
+  },
+  "self_other_binary": {
+    "anchor_fidelity": {"mean": 1.0, "std": 8.993834424997155e-17},
+    "gate_pass": false,
+    "other_other_accuracy": {"mean": 0.49609375, "std": 0.021035800027869155},
+    "residue_norm": {"mean": 4.594545826433741, "std": 0.8585328037788457},
+    "role_swap_accuracy": {"mean": 0.7783203125, "std": 0.09690630007204043},
+    "self_other_accuracy": {"mean": 0.74755859375, "std": 0.06543515310660594}
+  },
+  "viewless": {
+    "anchor_fidelity": {"mean": 1.0, "std": 8.993834424997155e-17},
+    "gate_pass": false,
+    "other_other_accuracy": {"mean": 0.50146484375, "std": 0.026739807754088022},
+    "residue_norm": {"mean": 4.6250867964358156, "std": 0.598503578791773},
+    "role_swap_accuracy": {"mean": 0.93115234375, "std": 0.04494044707798684},
+    "self_other_accuracy": {"mean": 0.50537109375, "std": 0.03151967987014162}
+  }
+}
