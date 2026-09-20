@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Self & Other Objects in Time — Gates 1–2</title>
+<title>Self & Other Objects in Time — Gates 1–3</title>
 <style>
 :root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;background:#0b0d12;color:#eef2ff}
 *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 50% 0,#182033,#0b0d12 45%) fixed}
 main{width:min(1120px,94vw);margin:auto;padding:56px 0 80px}
 h1{font-size:clamp(2.2rem,6vw,5rem);line-height:.95;margin:0 0 18px;letter-spacing:-.055em}
-h2{margin-top:0}.lead{font-size:1.12rem;line-height:1.65;color:#c8d0e0;max-width:880px}
+h2{margin-top:0}.lead{font-size:1.12rem;line-height:1.65;color:#c8d0e0;max-width:900px}
 code{color:#b8e1ff}.panel{margin-top:28px;border:1px solid #2a3345;background:#10141dce;border-radius:20px;padding:22px}
 .node{min-height:100px;border:1px solid #344158;border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;background:#121824;transition:.2s}
 .node.active{outline:3px solid #9bdcff;transform:translateY(-3px)}
@@ -24,17 +24,18 @@ button.alt{background:#232c3d;color:#e8eef8}
 .small{font-size:.9rem;color:#98a6bb;line-height:1.5}.equation{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;padding:14px;background:#080b10;border-radius:12px;overflow:auto;line-height:1.55}
 .pass{color:#b9f5c8}.fail{color:#ffb5b5}
 table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.92rem}th,td{text-align:right;padding:10px;border-bottom:1px solid #273144}th:first-child,td:first-child{text-align:left}
+.modes{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}.mode{padding:14px;border:1px solid #344158;border-radius:14px;background:#0d121a;text-align:center}
 footer{margin-top:36px;color:#78869a;font-size:.88rem}
-@media(max-width:760px){.cards{grid-template-columns:1fr}.nodes{grid-template-columns:1fr}table{font-size:.78rem}}
+@media(max-width:760px){.cards,.modes{grid-template-columns:1fr}.nodes{grid-template-columns:1fr}table{font-size:.76rem}}
 </style>
 </head>
 <body>
 <main>
-  <h1>return changed,<br>but stable.</h1>
+  <h1>addressable events.</h1>
   <p class="lead">
-    <b>SelfAndOtherObjectsInTime</b> asks how a stable control origin can move through
-    object relations and other viewpoints without either erasing the trip or dissolving into it.
-    Gate 1 tests residue. Gate 2 removes explicit agent IDs and tests distributed relational binding.
+    <b>SelfAndOtherObjectsInTime</b> is now three gates deep:
+    perspective detours leave residue; identities are distributed rather than integer slots;
+    and relational roles can be recovered from temporal position inside one event stream.
   </p>
 
   <section class="panel">
@@ -50,40 +51,14 @@ footer{margin-top:36px;color:#78869a;font-size:.88rem}
       <button onclick="play()">run the detour</button>
       <button class="alt" onclick="resetAnim()">reset</button>
     </div>
-    <div class="equation">SELF′ = same control anchor + residue(detour, object, τ)</div>
-  </section>
-
-  <section class="cards">
-    <article class="card">
-      <h3>Snapshot reset <span class="fail">fails</span></h3>
-      <p class="small">Returns perfectly, but deletes the detour.</p>
-      <div class="metric"><div class="label"><span>anchor</span><span>1.000</span></div><div class="track"><div class="fill" data-v="100"></div></div></div>
-      <div class="metric"><div class="label"><span>residue</span><span>0.000</span></div><div class="track"><div class="fill" data-v="0"></div></div></div>
-    </article>
-    <article class="card">
-      <h3>Anchored residue <span class="pass">passes</span></h3>
-      <p class="small">Keeps the control origin while the detour remains in resident state.</p>
-      <div class="metric"><div class="label"><span>anchor</span><span>1.000</span></div><div class="track"><div class="fill" data-v="100"></div></div></div>
-      <div class="metric"><div class="label"><span>recent recall</span><span>0.892</span></div><div class="track"><div class="fill" data-v="89.2"></div></div></div>
-    </article>
-    <article class="card">
-      <h3>Leaky overwrite <span class="fail">fails</span></h3>
-      <p class="small">Keeps the detour but lets visited viewpoints rewrite SELF.</p>
-      <div class="metric"><div class="label"><span>anchor</span><span>0.035</span></div><div class="track"><div class="fill" data-v="3.5"></div></div></div>
-      <div class="metric"><div class="label"><span>recent recall</span><span>0.892</span></div><div class="track"><div class="fill" data-v="89.2"></div></div></div>
-    </article>
+    <div class="equation">SELF′ = same control anchor + residue(detour)</div>
   </section>
 
   <section class="panel">
-    <h2>Gate 2 — no agent ID</h2>
-    <p class="lead">
-      The mechanism is no longer handed <code>agent_id</code>. It receives noisy continuous
-      identity vectors occupying actor, patient and perspective roles. The same identity can move
-      between roles; SELF is recognized only by similarity to the protected control anchor.
-    </p>
+    <h2>Gate 2 — identities are not slots</h2>
     <div class="equation">address = bind(ACTOR,A) + bind(PATIENT,B) + bind(VIEW,P) + selfness(P,anchor) + bind(OBJECT,O) + bind(TIME,τ)</div>
     <table>
-      <thead><tr><th>mechanism</th><th>A↔B role</th><th>SELF↔OTHER</th><th>OTHER↔OTHER</th><th>anchor</th></tr></thead>
+      <thead><tr><th>mechanism</th><th>A↔B</th><th>SELF↔OTHER</th><th>OTHER↔OTHER</th><th>anchor</th></tr></thead>
       <tbody>
         <tr><td><b>distributed binder</b> <span class="pass">pass</span></td><td>0.903</td><td>0.795</td><td>0.803</td><td>1.000</td></tr>
         <tr><td>role-blind bag</td><td class="fail">0.504</td><td>0.809</td><td>0.846</td><td>1.000</td></tr>
@@ -92,22 +67,46 @@ footer{margin-top:36px;color:#78869a;font-size:.88rem}
         <tr><td>mutable anchor</td><td>0.903</td><td>0.795</td><td>0.803</td><td class="fail">0.740</td></tr>
       </tbody>
     </table>
+  </section>
+
+  <section class="panel">
+    <h2>Gate 3 — time creates the role</h2>
+    <p class="lead">
+      There is no actor channel and no patient channel now. The memory receives a single
+      vector-valued stream. Identities occupy temporal modes and are recovered by event-relative phase.
+    </p>
+    <div class="modes">
+      <div class="mode"><b>perspective</b><br><span class="small">persistent mode</span></div>
+      <div class="mode"><b>object</b><br><span class="small">oscillatory mode</span></div>
+      <div class="mode"><b>actor</b><br><span class="small">early pulse</span></div>
+      <div class="mode"><b>patient</b><br><span class="small">late pulse</span></div>
+    </div>
+    <div class="equation" style="margin-top:16px">same identities + reversed temporal order → swapped relation</div>
+    <table>
+      <thead><tr><th>mechanism</th><th>9 samples</th><th>17 samples</th><th>25 samples</th><th>decode cosine</th></tr></thead>
+      <tbody>
+        <tr><td><b>phase relational</b> <span class="pass">pass</span></td><td>0.936</td><td>0.935</td><td>0.935</td><td>0.991</td></tr>
+        <tr><td>symmetric pair</td><td class="fail">0.494</td><td class="fail">0.502</td><td class="fail">0.499</td><td>0.991</td></tr>
+        <tr><td>fixed clock</td><td>0.936</td><td class="fail">0.578</td><td class="fail">0.225</td><td class="fail">0.361</td></tr>
+      </tbody>
+    </table>
     <p class="small">
-      Each pair differs in exactly one relational fact and has opposite hidden labels.
-      Test observations use fresh noisy vectors. Hidden integer IDs exist only in the evaluator.
+      The symmetric attacker proves that correctly identifying the participants is not enough.
+      The fixed-clock attacker proves that memorizing absolute sample positions is not enough.
+      Event-relative phase preserves the relation under time stretch.
     </p>
   </section>
 
   <section class="panel">
-    <h2>The next weakness is obvious</h2>
+    <h2>next weakness</h2>
     <p class="lead">
-      Gate 2 still supplies the roles themselves: actor, patient, perspective, object and τ.
-      The next gate should make the mechanism infer a relation from a temporal stream rather than
-      receiving a clean relational tuple. After that, τ itself should stop being handed in.
+      The event boundary and temporal basis are still supplied. The next clean attack is to make
+      the system discover where an event begins/ends, or make its temporal modes self-organize,
+      before adding any richer brain analogy.
     </p>
   </section>
 
-  <footer>Mechanism toys, not claims about consciousness or one-to-one brain circuitry. Receipts: results/gate1.json and results/gate2.json.</footer>
+  <footer>Mechanism toys, not consciousness claims or one-to-one brain circuitry. Receipts: results/gate1.json, gate2.json, gate3.json.</footer>
 </main>
 <script>
 const nodes=[...document.querySelectorAll('.node')];
