@@ -1,0 +1,59 @@
+{
+  "anchored_residue": {
+    "anchor_fidelity": {
+      "mean": 1.0,
+      "std": 7.211110073938365e-17
+    },
+    "changed_but_stable": true,
+    "order_sensitivity": {
+      "mean": 0.06734928310967095,
+      "std": 0.008285570382939119
+    },
+    "recent_recall": {
+      "mean": 0.8921874999999999,
+      "std": 0.07767055326022854
+    },
+    "residue_norm": {
+      "mean": 5.971166824767557,
+      "std": 1.2504822269540457
+    }
+  },
+  "leaky_overwrite": {
+    "anchor_fidelity": {
+      "mean": 0.03501661597287202,
+      "std": 0.13272018013584086
+    },
+    "changed_but_stable": false,
+    "order_sensitivity": {
+      "mean": 0.06734928310967095,
+      "std": 0.008285570382939119
+    },
+    "recent_recall": {
+      "mean": 0.8921874999999999,
+      "std": 0.07767055326022854
+    },
+    "residue_norm": {
+      "mean": 5.971166824767557,
+      "std": 1.2504822269540457
+    }
+  },
+  "snapshot_reset": {
+    "anchor_fidelity": {
+      "mean": 1.0,
+      "std": 7.211110073938365e-17
+    },
+    "changed_but_stable": false,
+    "order_sensitivity": {
+      "mean": 0.0,
+      "std": 0.0
+    },
+    "recent_recall": {
+      "mean": 0.5,
+      "std": 0.11592023119369631
+    },
+    "residue_norm": {
+      "mean": 0.0,
+      "std": 0.0
+    }
+  }
+}
