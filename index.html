@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Self & Other Objects in Time — Gates 1–4</title>
+<title>Self & Other Objects in Time — Gates 1–5</title>
 <style>
 :root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;background:#0b0d12;color:#eef2ff}
 *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 50% 0,#182033,#0b0d12 45%) fixed}
@@ -22,16 +22,18 @@ button.alt{background:#232c3d;color:#e8eef8}
 table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.92rem}th,td{text-align:right;padding:10px;border-bottom:1px solid #273144}th:first-child,td:first-child{text-align:left}
 .modes{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}.mode{padding:14px;border:1px solid #344158;border-radius:14px;background:#0d121a;text-align:center}
 .timeline{display:grid;grid-template-columns:2fr 1fr 3fr 1fr 2fr;gap:4px;margin:18px 0}.slice{min-height:72px;border-radius:12px;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;border:1px solid #344158;background:#0d121a}.event{outline:2px solid #9bdcff}
+.stack{margin:18px auto;max-width:760px;border-left:2px solid #516784;padding-left:18px}.frame{border:1px solid #344158;background:#0d121a;border-radius:14px;padding:14px;margin:8px 0}.child{margin-left:56px;outline:2px solid #9bdcff}
+.arrow{color:#8292aa;margin-left:16px}
 footer{margin-top:36px;color:#78869a;font-size:.88rem}
-@media(max-width:760px){.modes{grid-template-columns:1fr}.nodes{grid-template-columns:1fr}table{font-size:.76rem}.timeline{grid-template-columns:1fr}}
+@media(max-width:760px){.modes{grid-template-columns:1fr}.nodes{grid-template-columns:1fr}table{font-size:.76rem}.timeline{grid-template-columns:1fr}.child{margin-left:18px}}
 </style>
 </head>
 <body>
 <main>
   <h1>addressable events.</h1>
   <p class="lead">
-    A stable process can be interrupted, instantiate another viewpoint, acquire residue,
-    infer relations from temporal order, and now discover which bounded event owns that time coordinate.
+    A stable process can now discover bounded events, give each event a local time,
+    suspend one event while another runs, and return to the unfinished parent changed by the child.
   </p>
 
   <section class="panel">
@@ -64,7 +66,6 @@ footer{margin-top:36px;color:#78869a;font-size:.88rem}
       <div class="mode"><b>patient</b><br><span class="small">late pulse</span></div>
     </div>
     <div class="equation" style="margin-top:16px">same identities + reversed temporal order → swapped relation</div>
-    <p class="small">Phase-relational accuracy stays ≈0.935 from 9 to 25 samples; fixed absolute timing collapses to 0.225.</p>
   </section>
 
   <section class="panel">
@@ -77,26 +78,49 @@ footer{margin-top:36px;color:#78869a;font-size:.88rem}
       <div class="slice">resident process′</div>
     </div>
     <div class="equation">ongoing stream → boundary discovery → normalized phase → relation</div>
+    <p class="small">Boundary + phase: relation 0.897 · IoU 0.997 · boundary error 0.054 samples.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Gate 5 — interruption is nested local time</h2>
+    <p class="lead">
+      A child event now opens while the parent is unfinished. The parent clock pauses;
+      the child receives its own phase; closing the child writes residue into the parent;
+      then the exact unfinished parent resumes.
+    </p>
+
+    <div class="stack">
+      <div class="frame"><b>PARENT</b> · early phase <span class="arrow">↓ suspend</span></div>
+      <div class="frame child"><b>CHILD</b> · its own local clock<br><span class="small">compute relation → close → write back</span></div>
+      <div class="frame"><b>PARENT′</b> · resume old phase, now changed <span class="arrow">↓</span></div>
+      <div class="frame"><b>PARENT closes</b></div>
+    </div>
+
+    <div class="equation">PARENT → CHILD → CHILD′ → PARENT′</div>
+
     <table>
-      <thead><tr><th>mechanism</th><th>relation</th><th>boundary IoU</th><th>boundary MAE</th></tr></thead>
+      <thead><tr><th>mechanism</th><th>all episodes</th><th>long child ≥20</th></tr></thead>
       <tbody>
-        <tr><td><b>boundary + phase</b> <span class="pass">pass</span></td><td>0.897</td><td>0.997</td><td>0.054</td></tr>
-        <tr><td>whole stream = event</td><td class="fail">0.504</td><td>0.265</td><td>23.526</td></tr>
-        <tr><td>fixed training window</td><td class="fail">0.552</td><td>0.189</td><td>13.651</td></tr>
+        <tr><td><b>nested stack + writeback</b> <span class="pass">pass</span></td><td>0.994</td><td>0.993</td></tr>
+        <tr><td>flat global timeline</td><td class="fail">0.768</td><td class="fail">0.754</td></tr>
+        <tr><td>reset parent after child</td><td class="fail">0.500</td><td class="fail">0.510</td></tr>
+        <tr><td>preserve parent, no writeback</td><td class="fail">0.504</td><td class="fail">0.518</td></tr>
       </tbody>
     </table>
+
     <p class="small">
-      Event onset and duration are hidden at test time. The detector is still hand-designed:
-      Gate 4 removes oracle cuts, not the criterion for what deserves to become an event.
+      Matched pairs hold the parent fixed, change only the child, and flip the required label.
+      So a parent-only memory cannot pass. The child has to become part of what the resumed parent is.
     </p>
   </section>
 
   <section class="panel">
-    <h2>next weakness</h2>
+    <h2>next weakness — who deserves a child event?</h2>
     <p class="lead">
-      One event at a time is too clean. The next useful collision is interruption:
-      one object train opens while another is still resident. Can the system preserve both event-relative clocks,
-      perspective residue and the stable control origin without flattening them into one timeline?
+      Gate 5 still receives the nesting transition after boundary detection. The next gate should
+      make two candidate interruptions compete: one is consequential and deserves its own event context;
+      the other is merely change. That turns event admission into an active selection problem rather
+      than treating every disturbance as a new clock.
     </p>
   </section>
 
