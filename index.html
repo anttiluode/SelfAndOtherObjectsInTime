@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Self & Other Objects in Time — Gates 1–6</title>
+<title>Self & Other Objects in Time — Gates 1–7</title>
 <style>
 :root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;background:#0b0d12;color:#eef2ff}
 *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 50% 0,#182033,#0b0d12 45%) fixed}
@@ -107,11 +107,34 @@ footer{margin-top:36px;color:#78869a;font-size:.88rem}
   </section>
 
   <section class="panel">
-    <h2>next weakness — learn consequence, do not receive it</h2>
+    <h2>Gate 7 — choose experiments to learn what matters</h2>
     <p class="lead">
-      The transport is currently supplied. The next clean test is active causal identification:
-      choose a small intervention, watch which downstream variable changes, and learn enough of the write/observation map
-      to decide which future interruption deserves an event context.
+      The downstream map is hidden. Active and random strategies get the same three noisy probes.
+      Expected information gain avoids redundant tests, identifies the hidden causal map, then uses that posterior
+      to decide which interruption deserves the next child event.
+    </p>
+    <div class="equation">probe now → update causal posterior → admit the future interruption with largest expected consequence</div>
+    <table>
+      <thead><tr><th>strategy</th><th>prediction</th><th>relevant admission</th><th>map ID</th><th>entropy</th></tr></thead>
+      <tbody>
+        <tr><td>oracle</td><td>0.988</td><td>1.000</td><td>1.000</td><td>0.000</td></tr>
+        <tr><td><b>active EIG</b> <span class="pass">pass</span></td><td>0.966</td><td>0.954</td><td>0.953</td><td>0.424</td></tr>
+        <tr><td>random probes</td><td class="fail">0.690</td><td class="fail">0.433</td><td>0.531</td><td>1.006</td></tr>
+        <tr><td>no probes</td><td class="fail">0.495</td><td>0.000</td><td>0.047</td><td>3.000</td></tr>
+      </tbody>
+    </table>
+    <p class="small">
+      Same three-probe budget: active covers three nonredundant probe categories; random averages 2.375.
+      The supplied hypothesis family is the remaining scaffold.
+    </p>
+  </section>
+
+  <section class="panel">
+    <h2>next weakness — how much time should an admitted event get?</h2>
+    <p class="lead">
+      We can now decide which interruption deserves a child event. The next temporal question is allocation:
+      should a consequential event receive finer event-relative timing than a low-consequence one,
+      and can that precision adapt without simply leaking the answer?
     </p>
   </section>
 

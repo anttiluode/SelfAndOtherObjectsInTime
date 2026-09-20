@@ -112,6 +112,42 @@ The next attack is: can the system learn which interruption is consequential fro
 
 That is where AnotherOddThing and ReadWrite connect directly to this repo.
 
+
+## Gate 7 — discover consequence by choosing experiments
+
+Gate 6 knew the causal consequence map. Gate 7 hides it.
+
+The world contains one of eight possible downstream-sensitivity hypotheses. The mechanism gets a strict budget of three noisy interventions before it must decide which future interruption deserves a child event.
+
+Active probing chooses the next intervention by expected information gain. Random probing gets the exact same three-probe budget.
+
+After probing, both use the same admission rule:
+
+    score(delta) = E_h[ |w_h^T delta| ]
+
+where the expectation is under the current posterior over causal hypotheses.
+
+Across 64 deterministic worlds:
+
+| mechanism | prediction | relevant admission | hidden-map ID | posterior entropy | gate |
+|---|---:|---:|---:|---:|---|
+| oracle map | 0.988 | 1.000 | 1.000 | 0.000 | control |
+| **active EIG** | **0.966** | **0.954** | **0.953** | **0.424** | **pass** |
+| random probes | 0.690 | 0.433 | 0.531 | 1.006 | fail |
+| no probes | 0.495 | 0.000 | 0.047 | 3.000 | fail |
+
+Active and random both spend exactly three probes. Active chooses three nonredundant probe categories in every world; random averages 2.375.
+
+This is the direct bridge to the older active-experiment line: event admission no longer asks only "what matters downstream?" It asks:
+
+> **what experiment should I perform now so I can know what will matter downstream later?**
+
+### Important limitation
+
+The hypothesis family and probe likelihood model are still supplied. Gate 7 identifies which causal map is present; it does not yet learn an arbitrary transport from raw experience.
+
+The next clean attack is therefore either continuous transport learning or relevance-dependent temporal resolution: once an event is admitted, how much timing precision should it receive?
+
 ## Run
 
     python -m pip install -r requirements.txt
@@ -121,9 +157,10 @@ That is where AnotherOddThing and ReadWrite connect directly to this repo.
     python gate4_experiment.py --assert-gate --seeds 64
     python gate5_experiment.py --assert-gate --seeds 64
     python gate6_experiment.py --assert-gate --seeds 64
+    python gate7_experiment.py --assert-gate --seeds 64
     pytest -q
 
-Receipts are committed under results/gate1.json through results/gate6.json.
+Receipts are committed under results/gate1.json through results/gate7.json.
 
 ## Scientific inspirations, not equivalences
 
@@ -140,8 +177,8 @@ Those papers do not demonstrate the mechanisms in this repository.
 - **FrequencyAddressedState-dependentOperatorComposition** — address plus resident state; later gates add event-local phase and event admission.
 - **FusionMachine** — the parent computation remains resident while selected child computations run.
 - **Sihti / SighImageFactorization** — keep consequential components and residues separable instead of flattening everything.
-- **AnotherOddThing** — Gate 6's known consequence score should eventually become actively discovered by choosing informative interventions.
-- **ReadWrite** — the m^T J delta test is directly an observability/write question: which local change survives transport into a downstream observable?
+- **AnotherOddThing** — Gate 7 now directly reuses the expected-information-gain idea to choose which causal probe to run under a matched budget.
+- **ReadWrite** — Gate 6 supplied the observability/write map; Gate 7 now identifies which map is present from interventions and downstream observations.
 - **the_whorl / ArtificialCortex** — future work can replace globally supplied event phase with locally generated substrate phase.
 
 The target remains narrow: **a stable reference process whose relations live in bounded local times, whose detours write back, and whose event boundaries are allocated to changes that matter downstream rather than merely changes that are large**.
