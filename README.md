@@ -6,9 +6,7 @@ This is not a theory of consciousness and not a literal brain model. Each gate i
 
 ## Gate 1 — return changed, but stable
 
-The first gate asks whether a perspective detour should be perfectly reversible.
-
-Across 64 deterministic worlds:
+A perspective detour should neither vanish nor rewrite the control origin.
 
 | mechanism | anchor | residue | recent recall | order sensitivity | gate |
 |---|---:|---:|---:|---:|---|
@@ -26,11 +24,7 @@ SELF' has the same control origin, but a different resident history.
 
 ## Gate 2 — identity without an agent ID
 
-Gate 2 removes integer agent IDs from the memory mechanism. It receives only noisy continuous vectors for actor, patient, perspective, object and event-relative time.
-
-The same distributed identity can occupy different roles.
-
-Across 64 worlds:
+Gate 2 removes integer agent IDs from memory. Continuous identities are rebound into actor, patient and perspective roles.
 
 | mechanism | role swap | SELF/OTHER | OTHER/OTHER | anchor | gate |
 |---|---:|---:|---:|---:|---|
@@ -40,17 +34,11 @@ Across 64 worlds:
 | SELF/OTHER binary | 0.778 | 0.748 | 0.496 | 1.000 | fail |
 | mutable anchor | 0.903 | 0.795 | 0.803 | 0.740 | fail |
 
-A binary SELF/OTHER flag is therefore not enough in this toy: which other perspective is active matters too.
-
-But Gate 2 still supplied clean role channels.
+Which OTHER is active matters; a binary SELF/OTHER tag is insufficient in this toy.
 
 ## Gate 3 — time creates the role
 
-Gate 3 removes the actor, patient, perspective, object and tau channels from the memory API.
-
-The mechanism now receives **one vector-valued temporal stream**.
-
-Four components ride different temporal modes inside that stream:
+Gate 3 removes the clean actor/patient/view/object tuple from the memory API. It receives one vector-valued temporal stream:
 
 ~~~
 perspective : persistent / DC mode
@@ -59,57 +47,66 @@ actor       : early event pulse
 patient     : late event pulse
 ~~~
 
-The phase parser decomposes the event with a small temporal basis. The actor and patient are therefore not different ID slots. They are the identities occupying different positions in event time.
+The actor and patient are the identities occupying different positions in event time.
 
-That makes reversal mechanical:
-
-~~~
-A -> B
-reverse time
-B -> A
-~~~
-
-The stream contains the same identities and object either way. Temporal order supplies the relational meaning.
-
-### Time-stretch attack
-
-Training events are 9 samples long. The same event is then replayed at 17 and 25 samples.
-
-The successful mechanism uses **normalized event phase** rather than a fixed absolute clock.
-
-Across 64 deterministic worlds:
-
-| mechanism | 9 samples | 17 samples | 25 samples | decomposition cosine | gate |
+| mechanism | 9 samples | 17 samples | 25 samples | decode cosine | gate |
 |---|---:|---:|---:|---:|---|
 | **phase relational** | **0.936** | **0.935** | **0.935** | **0.991** | **pass** |
 | symmetric pair | 0.494 | 0.502 | 0.499 | 0.991 | fail |
 | fixed clock | 0.936 | 0.578 | 0.225 | 0.361 | fail |
 
-The two negative controls separate two ideas.
+Reversing the same event stream swaps actor and patient. Normalized event phase survives time stretch; an absolute training clock does not.
 
-**Symmetric pair** decomposes the stream almost perfectly, but then adds actor and patient together. It knows who was present and still loses the relation. Correct decomposition alone is not enough; direction must survive into the address.
-
-**Fixed clock** works at the exact training duration, then collapses when the same event is stretched. Absolute sample number is not the useful invariant here. Relative position inside the bounded event is.
-
-The reverse-stream diagnostic is even cleaner: the phase parser decodes a reversed 25-sample stream with mean cosine **0.991** to the swapped actor/patient identities.
-
-So Gate 3 turns the phrase from the motivating discussion into an executable claim:
+This is the executable form of the core claim:
 
 > **address says what is present; time gives the address relational meaning.**
 
-## What is still handed in
+## Gate 4 — discover the event before timing it
 
-Gate 3 is stronger than Gate 2, but the temporal basis itself is still designed by us. Event start and end are known, which is what allows normalized phase.
+Gate 3 still received a pre-cut event. Gate 4 puts the relational event inside a longer ongoing stream.
 
-The next attack should therefore remove one of those conveniences rather than adding more decorative complexity:
+Outside the event, the process contains quiet resident background plus slow drift. Event onset and duration are hidden from the mechanism. Test events appear at random positions and last from 9 to 25 samples.
 
-- infer event boundaries instead of receiving a pre-cut event;
-- learn or self-organize the temporal modes instead of supplying their shapes;
-- test overlapping/nested events where one object train interrupts another;
-- make relevance/value change the temporal resolution allocated to an event;
-- eventually replace a globally supplied phase coordinate with a locally generated or propagating field.
+The successful path is now:
 
-That is where the striatum / hippocampal-boundary / oscillatory-wave story can begin to touch the toy without being baked into it.
+~~~
+ongoing process
+    -> detect change boundaries
+    -> establish event-relative phase
+    -> recover actor / patient / view / object
+    -> relational address
+~~~
+
+Training deliberately places every event at the same easy location, start 16 with length 9, so a fixed-window attacker gets the strongest possible training advantage. Testing then randomizes both onset and duration.
+
+Across 64 deterministic worlds:
+
+| mechanism | relation accuracy | boundary IoU | boundary MAE | gate |
+|---|---:|---:|---:|---|
+| **boundary + phase** | **0.897** | **0.997** | **0.054** | **pass** |
+| whole stream = event | 0.504 | 0.265 | 23.526 | fail |
+| fixed training window | 0.552 | 0.189 | 13.651 | fail |
+
+So event-relative time is not useful until the system has established **which event owns that time coordinate**.
+
+That distinction matters for the motivating object train. A continuing process can be interrupted by a bounded event, reorganize around it, then return to the ongoing process carrying the event's residue. The event boundary is what allows "early" and "late" to mean early and late **inside this event**, rather than arbitrary global clock positions.
+
+### Important limitation
+
+The boundary detector is hand-designed. It uses robust frame-to-frame change energy: event boundaries and within-event dynamics are much faster than the quiet background.
+
+So Gate 4 removes oracle event cuts, but it does not yet discover what *kind* of change deserves to become an event. That is the next scientific weakness rather than something to hide.
+
+## What remains scaffolded
+
+The chain now has four distinct conveniences left to attack:
+
+- the boundary criterion is designed by us;
+- the temporal modes are designed by us;
+- there is only one event at a time;
+- relevance/value does not yet decide temporal resolution.
+
+The next clean experiments are therefore overlapping/interrupted event trains and adaptive time allocation. Those are much closer to the mouse -> remembered person -> mouse -> self trajectory that motivated the repo: one event can recruit another perspective/event while the first process is still resident.
 
 ## Run
 
@@ -118,14 +115,11 @@ python -m pip install -r requirements.txt
 python experiment.py --assert-gate --seeds 64
 python gate2_experiment.py --assert-gate --seeds 64
 python gate3_experiment.py --assert-gate --seeds 64
+python gate4_experiment.py --assert-gate --seeds 64
 pytest -q
 ~~~
 
-Receipts:
-
-- results/gate1.json
-- results/gate2.json
-- results/gate3.json
+Receipts are committed under results/gate1.json through results/gate4.json.
 
 ## Scientific inspirations, not equivalences
 
@@ -139,10 +133,10 @@ Those papers do not demonstrate the mechanisms in this repository.
 
 ## Relation to the older repo line
 
-- **FrequencyAddressedState-dependentOperatorComposition** — address plus resident state; Gate 3 now lets temporal mode choose relational role.
-- **FusionMachine** — multiple computations can remain resident; a visited viewpoint can persist as residue.
-- **Sihti / SighImageFactorization** — Gate 3 is explicitly a tiny temporal factorization: separate superposed components by mode.
-- **the_whorl / ArtificialCortex** — suggests the future phase coordinate could be generated by the substrate rather than supplied globally.
-- **AnotherOddThing** — later gates can choose which event/perspective to interrogate.
+- **FrequencyAddressedState-dependentOperatorComposition** — address plus resident state; temporal phase now contributes relational role.
+- **FusionMachine** — computations remain resident while another process is selected.
+- **Sihti / SighImageFactorization** — Gates 3–4 are temporal factorization: separate superposed components by modes after finding the event that owns them.
+- **the_whorl / ArtificialCortex** — suggests future phase coordinates generated by the substrate rather than a global normalized phase.
+- **AnotherOddThing** — suggests actively selecting which interruption/event/perspective is worth resolving.
 
-The target remains narrow: **a stable reference process whose object relations acquire meaning from the temporal path through them**.
+The target remains narrow: **a stable reference process whose object relations acquire meaning from the temporal path through bounded events**.
