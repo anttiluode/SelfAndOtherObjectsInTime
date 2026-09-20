@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Self & Other Objects in Time — Gates 1–7</title>
+<title>Self & Other Objects in Time — Gates 1–8</title>
 <style>
 :root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;background:#0b0d12;color:#eef2ff}
 *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 50% 0,#182033,#0b0d12 45%) fixed}
@@ -130,11 +130,34 @@ footer{margin-top:36px;color:#78869a;font-size:.88rem}
   </section>
 
   <section class="panel">
-    <h2>next weakness — how much time should an admitted event get?</h2>
+    <h2>Gate 8 — consequence buys temporal precision</h2>
     <p class="lead">
-      We can now decide which interruption deserves a child event. The next temporal question is allocation:
-      should a consequential event receive finer event-relative timing than a low-consequence one,
-      and can that precision adapt without simply leaking the answer?
+      Two admitted events compete for the same 16-bin timing budget. Fine order is visible at 12 bins
+      but disappears at 8 or 4. The consequential event gets fine timing; the other is compressed.
+    </p>
+    <div class="equation">temporal budget 16 → consequential event: 12 bins · low-consequence event: 4 bins</div>
+    <table>
+      <thead><tr><th>allocation</th><th>task</th><th>swapped slot</th><th>cost</th></tr></thead>
+      <tbody>
+        <tr><td><b>consequence-adaptive</b> <span class="pass">pass</span></td><td>1.000</td><td>1.000</td><td>16</td></tr>
+        <tr><td>uniform 8+8</td><td class="fail">0.504</td><td class="fail">0.510</td><td>16</td></tr>
+        <tr><td>raw magnitude</td><td class="fail">0.507</td><td class="fail">0.506</td><td>16</td></tr>
+        <tr><td>fixed fine slot</td><td>0.753</td><td class="fail">0.506</td><td>16</td></tr>
+        <tr><td>fine everywhere</td><td>1.000</td><td>1.000</td><td class="fail">24</td></tr>
+      </tbody>
+    </table>
+    <p class="small">
+      Fine-everywhere succeeds only by spending 50% more resource. The successful policy deliberately loses
+      low-consequence micro-order (0.505 recovery): selective timing, not universal precision.
+    </p>
+  </section>
+
+  <section class="panel">
+    <h2>next weakness — timing bandwidth must move during the event</h2>
+    <p class="lead">
+      Gate 8 chooses resolution once from an upstream consequence score. Next, let consequence change mid-event:
+      can the same local clock expand or contract its precision online under time warp and relevance swaps
+      without resetting the event?
     </p>
   </section>
 

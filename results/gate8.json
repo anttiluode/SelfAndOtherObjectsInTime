@@ -1,0 +1,47 @@
+{
+  "consequence_adaptive": {
+    "accuracy": {"mean": 1.0, "std": 0.0},
+    "gate_pass": true,
+    "irrelevant_order_accuracy": {"mean": 0.50546875, "std": 0.03695139068340325},
+    "irrelevant_resolution": {"mean": 4.0, "std": 0.0},
+    "relevant_resolution": {"mean": 12.0, "std": 0.0},
+    "resource_cost": {"mean": 16.0, "std": 0.0},
+    "swapped_slot_accuracy": {"mean": 1.0, "std": 0.0}
+  },
+  "fine_everywhere": {
+    "accuracy": {"mean": 1.0, "std": 0.0},
+    "gate_pass": false,
+    "irrelevant_order_accuracy": {"mean": 1.0, "std": 0.0},
+    "irrelevant_resolution": {"mean": 12.0, "std": 0.0},
+    "relevant_resolution": {"mean": 12.0, "std": 0.0},
+    "resource_cost": {"mean": 24.0, "std": 0.0},
+    "swapped_slot_accuracy": {"mean": 1.0, "std": 0.0}
+  },
+  "fixed_slot": {
+    "accuracy": {"mean": 0.752890625, "std": 0.024057299559788005},
+    "gate_pass": false,
+    "irrelevant_order_accuracy": {"mean": 0.7525, "std": 0.025860201081971516},
+    "irrelevant_resolution": {"mean": 8.0, "std": 0.0},
+    "relevant_resolution": {"mean": 8.0, "std": 0.0},
+    "resource_cost": {"mean": 16.0, "std": 0.0},
+    "swapped_slot_accuracy": {"mean": 0.5057812500000001, "std": 0.04811459911957597}
+  },
+  "magnitude": {
+    "accuracy": {"mean": 0.507265625, "std": 0.03396838704382908},
+    "gate_pass": false,
+    "irrelevant_order_accuracy": {"mean": 1.0, "std": 0.0},
+    "irrelevant_resolution": {"mean": 12.0, "std": 0.0},
+    "relevant_resolution": {"mean": 4.0, "std": 0.0},
+    "resource_cost": {"mean": 16.0, "std": 0.0},
+    "swapped_slot_accuracy": {"mean": 0.5057812500000001, "std": 0.04811459911957597}
+  },
+  "uniform": {
+    "accuracy": {"mean": 0.504140625, "std": 0.035017347124095155},
+    "gate_pass": false,
+    "irrelevant_order_accuracy": {"mean": 0.49148437500000003, "std": 0.03418332569922616},
+    "irrelevant_resolution": {"mean": 8.0, "std": 0.0},
+    "relevant_resolution": {"mean": 8.0, "std": 0.0},
+    "resource_cost": {"mean": 16.0, "std": 0.0},
+    "swapped_slot_accuracy": {"mean": 0.51046875, "std": 0.050355911007919425}
+  }
+}
