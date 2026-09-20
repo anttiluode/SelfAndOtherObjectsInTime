@@ -1,0 +1,26 @@
+{
+  "fixed_clock": {
+    "accuracy_17": {"mean": 0.578125, "std": 0.07112760564451907},
+    "accuracy_25": {"mean": 0.22493489583333331, "std": 0.0532651958722447},
+    "accuracy_9": {"mean": 0.935546875, "std": 0.04610459941759171},
+    "decomposition_cosine": {"mean": 0.3613657097757709, "std": 0.004913844082025398},
+    "gate_pass": false,
+    "reverse_decode_cosine": {"mean": 0.36151696790557886, "std": 0.004897514187512185}
+  },
+  "phase_relational": {
+    "accuracy_17": {"mean": 0.9345703125, "std": 0.04728799365956213},
+    "accuracy_25": {"mean": 0.9352213541666666, "std": 0.04803500834431545},
+    "accuracy_9": {"mean": 0.935546875, "std": 0.04610459941759171},
+    "decomposition_cosine": {"mean": 0.9914735746441863, "std": 0.0001305008237312266},
+    "gate_pass": true,
+    "reverse_decode_cosine": {"mean": 0.9914735746441863, "std": 0.00013050082373122359}
+  },
+  "symmetric_pair": {
+    "accuracy_17": {"mean": 0.501953125, "std": 0.03961736989224322},
+    "accuracy_25": {"mean": 0.49934895833333337, "std": 0.03737115270459939},
+    "accuracy_9": {"mean": 0.494140625, "std": 0.03635938022250834},
+    "decomposition_cosine": {"mean": 0.9914735746441863, "std": 0.0001305008237312266},
+    "gate_pass": false,
+    "reverse_decode_cosine": {"mean": 0.9914735746441863, "std": 0.00013050082373122359}
+  }
+}
