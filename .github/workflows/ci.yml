@@ -33,3 +33,5 @@ jobs:
         run: python gate4_experiment.py --assert-gate --seeds 64
       - name: Gate 5 receipt
         run: python gate5_experiment.py --assert-gate --seeds 64
+      - name: Gate 6 receipt
+        run: python gate6_experiment.py --assert-gate --seeds 64
