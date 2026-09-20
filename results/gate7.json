@@ -1,0 +1,94 @@
+{
+  "active_eig": {
+    "accuracy": {
+      "mean": 0.9660156249999999,
+      "std": 0.09974255802243782
+    },
+    "distinct_probe_categories": {
+      "mean": 3.0,
+      "std": 0.0
+    },
+    "gate_pass": true,
+    "hypothesis_accuracy": {
+      "mean": 0.953125,
+      "std": 0.21137108216357317
+    },
+    "posterior_entropy": {
+      "mean": 0.42432162762546183,
+      "std": 5.551115123125783e-17
+    },
+    "relevant_admission": {
+      "mean": 0.953515625,
+      "std": 0.2096251857622537
+    }
+  },
+  "no_probe": {
+    "accuracy": {
+      "mean": 0.494921875,
+      "std": 0.07476260443219172
+    },
+    "distinct_probe_categories": {
+      "mean": 0.0,
+      "std": 0.0
+    },
+    "gate_pass": false,
+    "hypothesis_accuracy": {
+      "mean": 0.046875,
+      "std": 0.21137108216357317
+    },
+    "posterior_entropy": {
+      "mean": 3.0,
+      "std": 0.0
+    },
+    "relevant_admission": {
+      "mean": 0.0,
+      "std": 0.0
+    }
+  },
+  "oracle": {
+    "accuracy": {
+      "mean": 0.9875,
+      "std": 0.018221724671391572
+    },
+    "distinct_probe_categories": {
+      "mean": 0.0,
+      "std": 0.0
+    },
+    "gate_pass": false,
+    "hypothesis_accuracy": {
+      "mean": 1.0,
+      "std": 0.0
+    },
+    "posterior_entropy": {
+      "mean": 0.0,
+      "std": 0.0
+    },
+    "relevant_admission": {
+      "mean": 1.0,
+      "std": 0.0
+    }
+  },
+  "random_probe": {
+    "accuracy": {
+      "mean": 0.6898437500000001,
+      "std": 0.25324914972401685
+    },
+    "distinct_probe_categories": {
+      "mean": 2.375,
+      "std": 0.57282196186948
+    },
+    "gate_pass": false,
+    "hypothesis_accuracy": {
+      "mean": 0.53125,
+      "std": 0.4990224819584785
+    },
+    "posterior_entropy": {
+      "mean": 1.006430625132832,
+      "std": 0.5533747818003232
+    },
+    "relevant_admission": {
+      "mean": 0.43320312499999997,
+      "std": 0.4710579575436916
+    }
+  }
+}
