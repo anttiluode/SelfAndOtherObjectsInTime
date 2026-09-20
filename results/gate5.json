@@ -1,0 +1,46 @@
+{
+  "flat_timeline": {
+    "accuracy": {
+      "mean": 0.76796875,
+      "std": 0.055983527589781014
+    },
+    "gate_pass": false,
+    "long_child_accuracy": {
+      "mean": 0.754135435281666,
+      "std": 0.10288597422972544
+    }
+  },
+  "nested_stack": {
+    "accuracy": {
+      "mean": 0.994140625,
+      "std": 0.0122969286797033
+    },
+    "gate_pass": true,
+    "long_child_accuracy": {
+      "mean": 0.9931942665058697,
+      "std": 0.01891209602046716
+    }
+  },
+  "no_writeback": {
+    "accuracy": {
+      "mean": 0.50390625,
+      "std": 0.03807341571876122
+    },
+    "gate_pass": false,
+    "long_child_accuracy": {
+      "mean": 0.5179623890656986,
+      "std": 0.08990600295616902
+    }
+  },
+  "reset_on_resume": {
+    "accuracy": {
+      "mean": 0.5,
+      "std": 0.06875
+    },
+    "gate_pass": false,
+    "long_child_accuracy": {
+      "mean": 0.509977025780463,
+      "std": 0.11227027300950265
+    }
+  }
+}

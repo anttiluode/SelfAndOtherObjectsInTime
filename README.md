@@ -67,7 +67,7 @@ Gate 3 still received a pre-cut event. Gate 4 puts the relational event inside a
 
 Outside the event, the process contains quiet resident background plus slow drift. Event onset and duration are hidden from the mechanism. Test events appear at random positions and last from 9 to 25 samples.
 
-The successful path is now:
+The successful path is:
 
 ~~~
 ongoing process
@@ -76,8 +76,6 @@ ongoing process
     -> recover actor / patient / view / object
     -> relational address
 ~~~
-
-Training deliberately places every event at the same easy location, start 16 with length 9, so a fixed-window attacker gets the strongest possible training advantage. Testing then randomizes both onset and duration.
 
 Across 64 deterministic worlds:
 
@@ -89,24 +87,107 @@ Across 64 deterministic worlds:
 
 So event-relative time is not useful until the system has established **which event owns that time coordinate**.
 
-That distinction matters for the motivating object train. A continuing process can be interrupted by a bounded event, reorganize around it, then return to the ongoing process carrying the event's residue. The event boundary is what allows "early" and "late" to mean early and late **inside this event**, rather than arbitrary global clock positions.
+The boundary detector is still hand-designed. Gate 4 removes oracle event cuts, not the criterion for what deserves to become an event.
 
-### Important limitation
+## Gate 5 — interruption requires an event stack
 
-The boundary detector is hand-designed. It uses robust frame-to-frame change energy: event boundaries and within-event dynamics are much faster than the quiet background.
+Gate 4 still allowed only one active event.
 
-So Gate 4 removes oracle event cuts, but it does not yet discover what *kind* of change deserves to become an event. That is the next scientific weakness rather than something to hide.
+Gate 5 gives the parent event an interruption:
+
+~~~
+PARENT early
+    -> CHILD opens
+        -> child event runs on its own local phase
+        -> child closes
+    -> PARENT resumes
+PARENT closes
+~~~
+
+The boundary markers stand in for already-detected open/close transitions from a Gate-4-like detector. Gate 5 isolates what the mechanism must do **after** those transitions are known.
+
+The successful mechanism uses stack semantics:
+
+1. pause the parent's local event phase;
+2. push the child;
+3. run the child on its own normalized phase;
+4. close the child;
+5. write the child's relational result into the parent;
+6. resume the parent's old phase rather than restarting it.
+
+The matched challenge is deliberately hard on shortcuts. Each pair contains the **same parent event**, two different children, and opposite labels. Therefore preserving the parent alone cannot solve it. The child must change the resumed parent address.
+
+Training uses parent length 17, child length 7, insertion point 8. Testing randomizes parent duration, child duration from 7 to 31, and interruption position.
+
+Across 64 deterministic worlds:
+
+| mechanism | all test episodes | long child (>=20) | gate |
+|---|---:|---:|---|
+| **nested stack + writeback** | **0.994** | **0.993** | **pass** |
+| flat global timeline | 0.768 | 0.754 | fail |
+| reset parent after child | 0.500 | 0.510 | fail |
+| preserve parent, no child writeback | 0.504 | 0.518 | fail |
+
+The failures separate three different requirements.
+
+**Flat timeline** still sees all the content, so it performs above chance. But increasing child duration pushes the parent's late role around a single global clock and degrades the relation.
+
+**Reset on resume** throws away the pre-interruption parent. It can return to parent-like activity but not to the unfinished parent event.
+
+**No writeback** preserves parent continuity perfectly well, but paired trials become indistinguishable because the child never changes the parent state.
+
+So the useful signature is now:
+
+~~~
+PARENT
+  -> CHILD
+  -> CHILD'
+  -> PARENT'
+~~~
+
+with two simultaneous facts:
+
+~~~
+PARENT' is still the same unfinished parent event
+AND
+PARENT' is changed by what happened in the child
+~~~
+
+That is the recursive version of Gate 1.
+
+It also makes the phrase **"time has an owner"** more precise. The parent and child can have different local clocks at the same point in the global stream. The child's duration should not advance the parent's event phase merely because wall-clock time passed.
+
+## Where this leaves the motivating sequence
+
+A trajectory such as:
+
+~~~
+ongoing self process
+    -> mouse/place event
+        -> remembered-person / other-perspective event
+        -> mouse/place event'
+    -> ongoing self process'
+~~~
+
+can now be represented without forcing everything onto one timeline or pretending the interruption vanished.
+
+This does **not** imply that human cognition literally implements a pushdown stack. The gate establishes only that this toy needs stack-like state semantics to preserve nested local time and child-to-parent residue under the matched attacks.
 
 ## What remains scaffolded
 
-The chain now has four distinct conveniences left to attack:
+The strongest remaining cheats are now clearer:
 
-- the boundary criterion is designed by us;
-- the temporal modes are designed by us;
-- there is only one event at a time;
-- relevance/value does not yet decide temporal resolution.
+- Gate 4's criterion for opening/closing an event is still designed by us;
+- Gate 3's temporal modes are still designed by us;
+- Gate 5 receives explicit nesting transitions after boundary detection;
+- there is only one level of child nesting in the benchmark;
+- relevance/value does not yet determine whether an interruption deserves its own event or how much temporal resolution it receives.
 
-The next clean experiments are therefore overlapping/interrupted event trains and adaptive time allocation. Those are much closer to the mouse -> remembered person -> mouse -> self trajectory that motivated the repo: one event can recruit another perspective/event while the first process is still resident.
+The next useful attack is therefore not "add more memory." It is **event admission**:
+
+> two changes happen while a parent event is active; which one deserves to open a child event?
+
+That is where the line can reconnect to AnotherOddThing / Sihti-style active selection and to relevance-dependent time allocation without smuggling the answer into the event marker.
 
 ## Run
 
@@ -116,10 +197,11 @@ python experiment.py --assert-gate --seeds 64
 python gate2_experiment.py --assert-gate --seeds 64
 python gate3_experiment.py --assert-gate --seeds 64
 python gate4_experiment.py --assert-gate --seeds 64
+python gate5_experiment.py --assert-gate --seeds 64
 pytest -q
 ~~~
 
-Receipts are committed under results/gate1.json through results/gate4.json.
+Receipts are committed under results/gate1.json through results/gate5.json.
 
 ## Scientific inspirations, not equivalences
 
@@ -133,10 +215,11 @@ Those papers do not demonstrate the mechanisms in this repository.
 
 ## Relation to the older repo line
 
-- **FrequencyAddressedState-dependentOperatorComposition** — address plus resident state; temporal phase now contributes relational role.
-- **FusionMachine** — computations remain resident while another process is selected.
-- **Sihti / SighImageFactorization** — Gates 3–4 are temporal factorization: separate superposed components by modes after finding the event that owns them.
-- **the_whorl / ArtificialCortex** — suggests future phase coordinates generated by the substrate rather than a global normalized phase.
-- **AnotherOddThing** — suggests actively selecting which interruption/event/perspective is worth resolving.
+- **FrequencyAddressedState-dependentOperatorComposition** — address plus resident state; Gate 5 adds nested local clocks and writeback.
+- **FusionMachine** — the parent computation remains resident while the child computation is selected and executed.
+- **Sihti / SighImageFactorization** — temporal components stay separable rather than being flattened into one mixed history.
+- **AnotherOddThing** — the next gate can actively decide which interruption deserves a new event context.
+- **ReadWrite** — Gate 5's child close is explicitly a write into the resumed parent state.
+- **the_whorl / ArtificialCortex** — future work can replace global event phase with a locally generated substrate phase.
 
-The target remains narrow: **a stable reference process whose object relations acquire meaning from the temporal path through bounded events**.
+The target remains narrow: **a stable reference process whose relations live in bounded, nestable local times and whose completed detours can change the process that resumes**.
