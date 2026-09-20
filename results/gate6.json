@@ -1,0 +1,34 @@
+{
+  "admit_all": {
+    "accuracy": {"mean": 0.5015624999999999, "std": 0.07138077362812763},
+    "admission_precision": {"mean": 0.5, "std": 0.0},
+    "gate_pass": false,
+    "matched_score_gap": {"mean": 3.369700352084948e-17, "std": 1.2774607208852876e-17},
+    "raw_distractor_to_relevant_ratio": {"mean": 8.244667485522818, "std": 0.46037899576729163},
+    "relevant_to_distractor_consequence_ratio": {"mean": 24.91425349729681, "std": 0.8432228356494332}
+  },
+  "consequence": {
+    "accuracy": {"mean": 0.9867187499999999, "std": 0.0165174800873953},
+    "admission_precision": {"mean": 1.0, "std": 0.0},
+    "gate_pass": true,
+    "matched_score_gap": {"mean": 3.369700352084948e-17, "std": 1.2774607208852876e-17},
+    "raw_distractor_to_relevant_ratio": {"mean": 8.244667485522818, "std": 0.46037899576729163},
+    "relevant_to_distractor_consequence_ratio": {"mean": 24.91425349729681, "std": 0.8432228356494332}
+  },
+  "ignore": {
+    "accuracy": {"mean": 0.497265625, "std": 0.058981788022739484},
+    "admission_precision": {"mean": 0.0, "std": 0.0},
+    "gate_pass": false,
+    "matched_score_gap": {"mean": 3.369700352084948e-17, "std": 1.2774607208852876e-17},
+    "raw_distractor_to_relevant_ratio": {"mean": 8.244667485522818, "std": 0.46037899576729163},
+    "relevant_to_distractor_consequence_ratio": {"mean": 24.91425349729681, "std": 0.8432228356494332}
+  },
+  "magnitude": {
+    "accuracy": {"mean": 0.4921875, "std": 0.0650833299989329},
+    "admission_precision": {"mean": 0.0, "std": 0.0},
+    "gate_pass": false,
+    "matched_score_gap": {"mean": 3.369700352084948e-17, "std": 1.2774607208852876e-17},
+    "raw_distractor_to_relevant_ratio": {"mean": 8.244667485522818, "std": 0.46037899576729163},
+    "relevant_to_distractor_consequence_ratio": {"mean": 24.91425349729681, "std": 0.8432228356494332}
+  }
+}
