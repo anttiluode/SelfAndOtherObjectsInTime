@@ -148,6 +148,46 @@ The hypothesis family and probe likelihood model are still supplied. Gate 7 iden
 
 The next clean attack is therefore either continuous transport learning or relevance-dependent temporal resolution: once an event is admitted, how much timing precision should it receive?
 
+
+## Gate 8 — consequence buys temporal precision
+
+Gate 7 can identify which interruption matters. Gate 8 asks what happens **after admission** when temporal resolution itself is limited.
+
+Two events are already active under a strict total timing budget of 16 bins. Each contains a fine relation: A occurs just before B or B just before A. At 12 bins the order is recoverable; at 8 or 4 bins the pulses collapse into the same temporal bin.
+
+The consequential event receives score 1.0 and the other score 0.2. Those scores are independent of the event's order label. The consequential slot alternates across trials, while the low-consequence event is deliberately 3–5x larger in raw amplitude.
+
+The adaptive allocation is:
+
+    consequential event -> 12 bins
+    low-consequence event -> 4 bins
+
+for the same total budget as a uniform 8+8 allocation.
+
+Across 64 deterministic worlds:
+
+| allocation | task accuracy | swapped-slot accuracy | relevant resolution | irrelevant resolution | cost | gate |
+|---|---:|---:|---:|---:|---:|---|
+| **consequence-adaptive** | **1.000** | **1.000** | **12** | **4** | **16** | **pass** |
+| uniform 8+8 | 0.504 | 0.510 | 8 | 8 | 16 | fail |
+| raw-magnitude adaptive | 0.507 | 0.506 | 4 | 12 | 16 | fail |
+| fixed fine slot | 0.753 | 0.506 | 8 avg | 8 avg | 16 | fail |
+| fine everywhere | 1.000 | 1.000 | 12 | 12 | 24 | budget control |
+
+The budget control is important: perfect timing everywhere works, but only by spending **50% more temporal resource**.
+
+The low-consequence event's own fine order is intentionally lost under the successful policy (irrelevant-order recovery 0.505, chance). This gate is therefore not just "better timing." It is **selective timing**.
+
+The result is the executable form of the demand-dependent timing idea:
+
+> **what matters is not only admitted into an event; it is represented with finer temporal resolution.**
+
+### Important limitation
+
+The consequence score is supplied by the upstream mechanism. Gate 8 isolates allocation after relevance has been established; it does not yet jointly learn relevance and timing resolution.
+
+The next clean attack is a time-warp/relevance-swap world where the same event can change consequence during its lifetime. Then temporal resolution must expand or contract online rather than being chosen once at event start.
+
 ## Run
 
     python -m pip install -r requirements.txt
@@ -158,9 +198,10 @@ The next clean attack is therefore either continuous transport learning or relev
     python gate5_experiment.py --assert-gate --seeds 64
     python gate6_experiment.py --assert-gate --seeds 64
     python gate7_experiment.py --assert-gate --seeds 64
+    python gate8_experiment.py --assert-gate --seeds 64
     pytest -q
 
-Receipts are committed under results/gate1.json through results/gate7.json.
+Receipts are committed under results/gate1.json through results/gate8.json.
 
 ## Scientific inspirations, not equivalences
 
@@ -174,11 +215,11 @@ Those papers do not demonstrate the mechanisms in this repository.
 
 ## Relation to the older repo line
 
-- **FrequencyAddressedState-dependentOperatorComposition** — address plus resident state; later gates add event-local phase and event admission.
+- **FrequencyAddressedState-dependentOperatorComposition** — address plus resident state; later gates add event-local phase, admission and now consequence-dependent timing bandwidth.
 - **FusionMachine** — the parent computation remains resident while selected child computations run.
 - **Sihti / SighImageFactorization** — keep consequential components and residues separable instead of flattening everything.
 - **AnotherOddThing** — Gate 7 now directly reuses the expected-information-gain idea to choose which causal probe to run under a matched budget.
 - **ReadWrite** — Gate 6 supplied the observability/write map; Gate 7 now identifies which map is present from interventions and downstream observations.
 - **the_whorl / ArtificialCortex** — future work can replace globally supplied event phase with locally generated substrate phase.
 
-The target remains narrow: **a stable reference process whose relations live in bounded local times, whose detours write back, and whose event boundaries are allocated to changes that matter downstream rather than merely changes that are large**.
+The target remains narrow: **a stable reference process whose relations live in bounded local times, whose detours write back, whose event boundaries are allocated to consequential changes, and whose temporal precision is itself allocated according to what matters**.
