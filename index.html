@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Self & Other Objects in Time — Gates 1–8</title>
+<title>Self & Other Objects in Time — Gates 1–9</title>
 <style>
 :root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;background:#0b0d12;color:#eef2ff}
 *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 50% 0,#182033,#0b0d12 45%) fixed}
@@ -153,11 +153,35 @@ footer{margin-top:36px;color:#78869a;font-size:.88rem}
   </section>
 
   <section class="panel">
-    <h2>next weakness — timing bandwidth must move during the event</h2>
+    <h2>Gate 9 — timing bandwidth moves inside the same event</h2>
     <p class="lead">
-      Gate 8 chooses resolution once from an upstream consequence score. Next, let consequence change mid-event:
-      can the same local clock expand or contract its precision online under time warp and relevance swaps
-      without resetting the event?
+      The same two event identities persist across four epochs while relevance swaps every epoch.
+      The timing budget moves online, epoch duration is warped ×1/×2/×3, and the event must keep its resident context.
+    </p>
+    <div class="equation">same event · changing consequence → 12/4 timing bins move online · no reset</div>
+    <table>
+      <thead><tr><th>policy</th><th>all</th><th>warped</th><th>after swap</th><th>cost</th></tr></thead>
+      <tbody>
+        <tr><td><b>dynamic consequence</b> <span class="pass">pass</span></td><td>1.000</td><td>1.000</td><td>1.000</td><td>16</td></tr>
+        <tr><td>static start</td><td>0.751</td><td>0.751</td><td>0.667</td><td>16</td></tr>
+        <tr><td>one-epoch lag</td><td>0.623</td><td>0.627</td><td class="fail">0.498</td><td>16</td></tr>
+        <tr><td>uniform / magnitude</td><td class="fail">0.500</td><td class="fail">0.496</td><td class="fail">0.499</td><td>16</td></tr>
+        <tr><td>reset on reallocation</td><td>0.626</td><td>0.627</td><td class="fail">0.501</td><td>16</td></tr>
+        <tr><td>fine everywhere</td><td>1.000</td><td>1.000</td><td>1.000</td><td class="fail">24</td></tr>
+      </tbody>
+    </table>
+    <p class="small">
+      Correctly moving timing bandwidth is not enough if the move creates a new event.
+      The successful clock becomes sharper or coarser while the event identity and resident context persist.
+    </p>
+  </section>
+
+  <section class="panel">
+    <h2>next weakness — phase is still software</h2>
+    <p class="lead">
+      We now have bounded local time, nesting, active event admission, and moving temporal precision.
+      But normalized phase is still handed in mathematically. The next substrate-level test is to generate phase locally
+      with an oscillator or propagating field and see whether these invariances survive without a global clock variable.
     </p>
   </section>
 

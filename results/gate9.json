@@ -1,0 +1,51 @@
+{
+  "dynamic_consequence": {
+    "accuracy": {"mean": 1.0, "std": 0.0},
+    "gate_pass": true,
+    "post_switch_accuracy": {"mean": 1.0, "std": 0.0},
+    "resource_cost": {"mean": 16.0, "std": 0.0},
+    "warped_accuracy": {"mean": 1.0, "std": 0.0}
+  },
+  "fine_everywhere": {
+    "accuracy": {"mean": 1.0, "std": 0.0},
+    "gate_pass": false,
+    "post_switch_accuracy": {"mean": 1.0, "std": 0.0},
+    "resource_cost": {"mean": 24.0, "std": 0.0},
+    "warped_accuracy": {"mean": 1.0, "std": 0.0}
+  },
+  "lag_one": {
+    "accuracy": {"mean": 0.6233984374999999, "std": 0.02280336798169502},
+    "gate_pass": false,
+    "post_switch_accuracy": {"mean": 0.4978645833333333, "std": 0.030404490642260026},
+    "resource_cost": {"mean": 16.0, "std": 0.0},
+    "warped_accuracy": {"mean": 0.6271575891327874, "std": 0.029524914869693424}
+  },
+  "magnitude": {
+    "accuracy": {"mean": 0.4995703125, "std": 0.024947423963254074},
+    "gate_pass": false,
+    "post_switch_accuracy": {"mean": 0.49921875, "std": 0.0263637890042331},
+    "resource_cost": {"mean": 16.0, "std": 0.0},
+    "warped_accuracy": {"mean": 0.49634736648270017, "std": 0.030612779160641486}
+  },
+  "reset_on_reallocation": {
+    "accuracy": {"mean": 0.625703125, "std": 0.021894940688076202},
+    "gate_pass": false,
+    "post_switch_accuracy": {"mean": 0.5009375, "std": 0.029193254250768276},
+    "resource_cost": {"mean": 16.0, "std": 0.0},
+    "warped_accuracy": {"mean": 0.6268468605693905, "std": 0.027323354457966}
+  },
+  "static_start": {
+    "accuracy": {"mean": 0.7505078125, "std": 0.016239056937360732},
+    "gate_pass": false,
+    "post_switch_accuracy": {"mean": 0.66734375, "std": 0.021652075916480985},
+    "resource_cost": {"mean": 16.0, "std": 0.0},
+    "warped_accuracy": {"mean": 0.7513772479913785, "std": 0.022335367036348697}
+  },
+  "uniform": {
+    "accuracy": {"mean": 0.4995703125, "std": 0.024947423963254074},
+    "gate_pass": false,
+    "post_switch_accuracy": {"mean": 0.49921875, "std": 0.0263637890042331},
+    "resource_cost": {"mean": 16.0, "std": 0.0},
+    "warped_accuracy": {"mean": 0.49634736648270017, "std": 0.030612779160641486}
+  }
+}

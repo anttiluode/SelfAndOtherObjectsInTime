@@ -188,6 +188,56 @@ The consequence score is supplied by the upstream mechanism. Gate 8 isolates all
 
 The next clean attack is a time-warp/relevance-swap world where the same event can change consequence during its lifetime. Then temporal resolution must expand or contract online rather than being chosen once at event start.
 
+
+## Gate 9 — timing bandwidth moves without resetting the event
+
+Gate 8 chose temporal resolution once. Gate 9 keeps the **same two continuing event identities** alive across four epochs while consequence swaps between them every epoch.
+
+There is no new event boundary at the swap.
+
+Each epoch also undergoes an independent x1/x2/x3 time warp. Fine order is still decoded in normalized event phase, so stretching wall-clock duration should not change the relation.
+
+The successful policy reallocates the same 16-bin budget online:
+
+    current consequential stream -> 12 bins
+    other stream -> 4 bins
+
+while preserving a resident context established once at event start.
+
+Across 64 deterministic worlds:
+
+| policy | all epochs | warped epochs | after relevance swap | cost | gate |
+|---|---:|---:|---:|---:|---|
+| **dynamic consequence** | **1.000** | **1.000** | **1.000** | **16** | **pass** |
+| static start allocation | 0.751 | 0.751 | 0.667 | 16 | fail |
+| one-epoch lag | 0.623 | 0.627 | 0.498 | 16 | fail |
+| uniform | 0.500 | 0.496 | 0.499 | 16 | fail |
+| raw magnitude | 0.500 | 0.496 | 0.499 | 16 | fail |
+| reset when reallocating | 0.626 | 0.627 | 0.501 | 16 | fail |
+| fine everywhere | 1.000 | 1.000 | 1.000 | 24 | budget control |
+
+The reset attacker is important. It receives the **correct dynamic timing allocation**, but whenever relevance moves it treats that move as a fresh event and loses the resident context needed to interpret the fine temporal relation. Performance collapses to chance after swaps.
+
+So Gate 9 separates:
+
+    change timing bandwidth
+
+from:
+
+    restart the event.
+
+The successful signature is:
+
+> **the same event can become temporally sharper or coarser while remaining the same continuing event.**
+
+That is a stronger version of "time has an owner": the owner can keep its identity while the precision of its clock changes.
+
+### Important limitation
+
+Consequence is still supplied online. The gate tests dynamic resource reallocation and continuity, not how a biological system computes the changing consequence signal.
+
+The next weakness is now structural: the local phase coordinate is still a software variable. A future gate should replace normalized event phase with a propagating/local oscillator or field coordinate and test whether the same timing invariances survive without a globally supplied clock.
+
 ## Run
 
     python -m pip install -r requirements.txt
@@ -199,9 +249,10 @@ The next clean attack is a time-warp/relevance-swap world where the same event c
     python gate6_experiment.py --assert-gate --seeds 64
     python gate7_experiment.py --assert-gate --seeds 64
     python gate8_experiment.py --assert-gate --seeds 64
+    python gate9_experiment.py --assert-gate --seeds 64
     pytest -q
 
-Receipts are committed under results/gate1.json through results/gate8.json.
+Receipts are committed under results/gate1.json through results/gate9.json.
 
 ## Scientific inspirations, not equivalences
 
@@ -220,6 +271,6 @@ Those papers do not demonstrate the mechanisms in this repository.
 - **Sihti / SighImageFactorization** — keep consequential components and residues separable instead of flattening everything.
 - **AnotherOddThing** — Gate 7 now directly reuses the expected-information-gain idea to choose which causal probe to run under a matched budget.
 - **ReadWrite** — Gate 6 supplied the observability/write map; Gate 7 now identifies which map is present from interventions and downstream observations.
-- **the_whorl / ArtificialCortex** — future work can replace globally supplied event phase with locally generated substrate phase.
+- **the_whorl / ArtificialCortex** — Gate 9 makes the remaining gap explicit: timing bandwidth can move, but phase is still globally supplied; the next substrate-level step is a locally generated phase/field.
 
-The target remains narrow: **a stable reference process whose relations live in bounded local times, whose detours write back, whose event boundaries are allocated to consequential changes, and whose temporal precision is itself allocated according to what matters**.
+The target remains narrow: **a stable reference process whose relations live in bounded local times, whose detours write back, whose event boundaries are allocated to consequential changes, and whose temporal precision can move online without destroying event continuity**.
