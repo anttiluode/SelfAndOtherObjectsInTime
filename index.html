@@ -3,18 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Self & Other Objects in Time — Gate 1</title>
+<title>Self & Other Objects in Time — Gates 1–2</title>
 <style>
 :root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;background:#0b0d12;color:#eef2ff}
 *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 50% 0,#182033,#0b0d12 45%) fixed}
-main{width:min(1100px,94vw);margin:auto;padding:56px 0 80px}
+main{width:min(1120px,94vw);margin:auto;padding:56px 0 80px}
 h1{font-size:clamp(2.2rem,6vw,5rem);line-height:.95;margin:0 0 18px;letter-spacing:-.055em}
-.lead{font-size:1.15rem;line-height:1.65;color:#c8d0e0;max-width:820px}
+h2{margin-top:0}.lead{font-size:1.12rem;line-height:1.65;color:#c8d0e0;max-width:880px}
 code{color:#b8e1ff}.panel{margin-top:28px;border:1px solid #2a3345;background:#10141dce;border-radius:20px;padding:22px}
-.train{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:center;margin:26px 0}
-.node{min-height:100px;border:1px solid #344158;border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;position:relative;background:#121824}
+.node{min-height:100px;border:1px solid #344158;border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;background:#121824;transition:.2s}
 .node.active{outline:3px solid #9bdcff;transform:translateY(-3px)}
-.arrow{text-align:center;color:#7d8aa1;font-size:1.4rem}.nodes{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:center}
+.nodes{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:center}
 .controls{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
 button{background:#eaf4ff;color:#0c1320;border:0;border-radius:999px;padding:10px 16px;font-weight:700;cursor:pointer}
 button.alt{background:#232c3d;color:#e8eef8}
@@ -22,26 +21,28 @@ button.alt{background:#232c3d;color:#e8eef8}
 .card{border:1px solid #2d394e;background:#0e131c;border-radius:16px;padding:16px}.card h3{margin-top:0}
 .metric{margin:12px 0}.label{display:flex;justify-content:space-between;font-size:.88rem;color:#b8c2d3}
 .track{height:9px;background:#202837;border-radius:999px;overflow:hidden;margin-top:6px}.fill{height:100%;background:linear-gradient(90deg,#9bdcff,#d9b2ff);width:0;transition:width .5s}
-.small{font-size:.9rem;color:#98a6bb;line-height:1.5}.equation{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;padding:14px;background:#080b10;border-radius:12px;overflow:auto}
+.small{font-size:.9rem;color:#98a6bb;line-height:1.5}.equation{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;padding:14px;background:#080b10;border-radius:12px;overflow:auto;line-height:1.55}
 .pass{color:#b9f5c8}.fail{color:#ffb5b5}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.92rem}th,td{text-align:right;padding:10px;border-bottom:1px solid #273144}th:first-child,td:first-child{text-align:left}
 footer{margin-top:36px;color:#78869a;font-size:.88rem}
-@media(max-width:760px){.cards{grid-template-columns:1fr}.nodes{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}}
+@media(max-width:760px){.cards{grid-template-columns:1fr}.nodes{grid-template-columns:1fr}table{font-size:.78rem}}
 </style>
 </head>
 <body>
 <main>
   <h1>return changed,<br>but stable.</h1>
   <p class="lead">
-    Gate 1 for <b>SelfAndOtherObjectsInTime</b>. A perspective detour is treated as a write:
-    the control origin can return to SELF while the path through OTHER remains in resident history.
-    This page is a conceptual microscope; the Python experiment and tests are the receipt.
+    <b>SelfAndOtherObjectsInTime</b> asks how a stable control origin can move through
+    object relations and other viewpoints without either erasing the trip or dissolving into it.
+    Gate 1 tests residue. Gate 2 removes explicit agent IDs and tests distributed relational binding.
   </p>
 
   <section class="panel">
+    <h2>Gate 1 — the detour is a write</h2>
     <div class="nodes" id="train">
-      <div class="node">SELF<br><small>introspection</small></div>
+      <div class="node">SELF<br><small>current process</small></div>
       <div class="node">object<br><small>interrupts</small></div>
-      <div class="node">OTHER<br><small>perspective instantiated</small></div>
+      <div class="node">OTHER<br><small>view instantiated</small></div>
       <div class="node">object-from-OTHER<br><small>relation computed</small></div>
       <div class="node">SELF′<br><small>same anchor, new history</small></div>
     </div>
@@ -55,40 +56,58 @@ footer{margin-top:36px;color:#78869a;font-size:.88rem}
   <section class="cards">
     <article class="card">
       <h3>Snapshot reset <span class="fail">fails</span></h3>
-      <p class="small">Returns perfectly, but deletes the detour. Stable without history.</p>
+      <p class="small">Returns perfectly, but deletes the detour.</p>
       <div class="metric"><div class="label"><span>anchor</span><span>1.000</span></div><div class="track"><div class="fill" data-v="100"></div></div></div>
       <div class="metric"><div class="label"><span>residue</span><span>0.000</span></div><div class="track"><div class="fill" data-v="0"></div></div></div>
-      <div class="metric"><div class="label"><span>recent recall</span><span>0.500</span></div><div class="track"><div class="fill" data-v="50"></div></div></div>
     </article>
-
     <article class="card">
       <h3>Anchored residue <span class="pass">passes</span></h3>
-      <p class="small">Returns to the same control origin while keeping an order-sensitive write.</p>
+      <p class="small">Keeps the control origin while the detour remains in resident state.</p>
       <div class="metric"><div class="label"><span>anchor</span><span>1.000</span></div><div class="track"><div class="fill" data-v="100"></div></div></div>
-      <div class="metric"><div class="label"><span>residue</span><span>5.971</span></div><div class="track"><div class="fill" data-v="86"></div></div></div>
       <div class="metric"><div class="label"><span>recent recall</span><span>0.892</span></div><div class="track"><div class="fill" data-v="89.2"></div></div></div>
     </article>
-
     <article class="card">
       <h3>Leaky overwrite <span class="fail">fails</span></h3>
-      <p class="small">Keeps useful residue, but simulated perspectives contaminate the control anchor.</p>
+      <p class="small">Keeps the detour but lets visited viewpoints rewrite SELF.</p>
       <div class="metric"><div class="label"><span>anchor</span><span>0.035</span></div><div class="track"><div class="fill" data-v="3.5"></div></div></div>
-      <div class="metric"><div class="label"><span>residue</span><span>5.971</span></div><div class="track"><div class="fill" data-v="86"></div></div></div>
       <div class="metric"><div class="label"><span>recent recall</span><span>0.892</span></div><div class="track"><div class="fill" data-v="89.2"></div></div></div>
     </article>
   </section>
 
   <section class="panel">
-    <h2>Why time is already part of the address</h2>
+    <h2>Gate 2 — no agent ID</h2>
     <p class="lead">
-      The memory key binds <code>agent + object + τ</code>, where τ is position inside the current event.
-      The same object relation at a different temporal address is therefore a different write.
-      Later gates can replace this handed-in τ with internally generated phase, elapsed-time populations,
-      boundaries, and propagating fields.
+      The mechanism is no longer handed <code>agent_id</code>. It receives noisy continuous
+      identity vectors occupying actor, patient and perspective roles. The same identity can move
+      between roles; SELF is recognized only by similarity to the protected control anchor.
+    </p>
+    <div class="equation">address = bind(ACTOR,A) + bind(PATIENT,B) + bind(VIEW,P) + selfness(P,anchor) + bind(OBJECT,O) + bind(TIME,τ)</div>
+    <table>
+      <thead><tr><th>mechanism</th><th>A↔B role</th><th>SELF↔OTHER</th><th>OTHER↔OTHER</th><th>anchor</th></tr></thead>
+      <tbody>
+        <tr><td><b>distributed binder</b> <span class="pass">pass</span></td><td>0.903</td><td>0.795</td><td>0.803</td><td>1.000</td></tr>
+        <tr><td>role-blind bag</td><td class="fail">0.504</td><td>0.809</td><td>0.846</td><td>1.000</td></tr>
+        <tr><td>viewless</td><td>0.931</td><td class="fail">0.505</td><td class="fail">0.501</td><td>1.000</td></tr>
+        <tr><td>SELF/OTHER binary</td><td>0.778</td><td>0.748</td><td class="fail">0.496</td><td>1.000</td></tr>
+        <tr><td>mutable anchor</td><td>0.903</td><td>0.795</td><td>0.803</td><td class="fail">0.740</td></tr>
+      </tbody>
+    </table>
+    <p class="small">
+      Each pair differs in exactly one relational fact and has opposite hidden labels.
+      Test observations use fresh noisy vectors. Hidden integer IDs exist only in the evaluator.
     </p>
   </section>
 
-  <footer>Mechanism toy, not a claim about consciousness or a one-to-one brain model. Deterministic gate receipt: results/gate1.json.</footer>
+  <section class="panel">
+    <h2>The next weakness is obvious</h2>
+    <p class="lead">
+      Gate 2 still supplies the roles themselves: actor, patient, perspective, object and τ.
+      The next gate should make the mechanism infer a relation from a temporal stream rather than
+      receiving a clean relational tuple. After that, τ itself should stop being handed in.
+    </p>
+  </section>
+
+  <footer>Mechanism toys, not claims about consciousness or one-to-one brain circuitry. Receipts: results/gate1.json and results/gate2.json.</footer>
 </main>
 <script>
 const nodes=[...document.querySelectorAll('.node')];
@@ -96,8 +115,8 @@ let timer=null;
 function animateBars(){document.querySelectorAll('.fill').forEach(x=>x.style.width=x.dataset.v+'%')}
 function resetAnim(){clearInterval(timer);nodes.forEach(n=>n.classList.remove('active'));document.querySelectorAll('.fill').forEach(x=>x.style.width='0')}
 function play(){
-  resetAnim(); animateBars(); let i=0; nodes[0].classList.add('active');
-  timer=setInterval(()=>{nodes.forEach(n=>n.classList.remove('active'));i++; if(i>=nodes.length){clearInterval(timer);nodes[nodes.length-1].classList.add('active');return} nodes[i].classList.add('active')},650)
+  resetAnim();animateBars();let i=0;nodes[0].classList.add('active');
+  timer=setInterval(()=>{nodes.forEach(n=>n.classList.remove('active'));i++;if(i>=nodes.length){clearInterval(timer);nodes[nodes.length-1].classList.add('active');return}nodes[i].classList.add('active')},650)
 }
 animateBars();
 </script>
